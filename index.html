@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guía interactiva sobre arquitectura de computadores, redes y análisis forense digital.">
+  <title>Núcleo | Sistemas, redes y evidencia digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Núcleo, volver al inicio">
+      <span class="brand-mark">N/</span>
+      <span>NÚCLEO<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#arquitectura">01 / CPU</a>
+      <a href="#redes">02 / REDES</a>
+      <a href="#forense">03 / FORENSE</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Activar tema oscuro" title="Cambiar tema">
+        <span class="theme-icon" aria-hidden="true">◐</span>
+      </button>
+      <button class="export-button" id="exportPdf" type="button"><span aria-hidden="true">↓</span> Exportar PDF</button>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero" id="inicio">
+      <div class="hero-grid"></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="pulse"></span> Guía visual / Informática básica II</p>
+        <h1>El sistema<br><em>debajo</em> de todo.</h1>
+        <p class="hero-lede">Una lectura visual de cómo piensa un computador, cómo se conectan sus nodos y cómo se reconstruye la evidencia digital.</p>
+        <a class="primary-link" href="#arquitectura">Explorar módulos <span>↘</span></a>
+      </div>
+      <div class="hero-aside reveal">
+        <div class="orbit orbit-one"><span>CPU</span></div>
+        <div class="orbit orbit-two"><span>NET</span></div>
+        <div class="orbit orbit-three"><span>RAM</span></div>
+        <div class="hero-center">N/</div>
+        <p class="orbit-caption">Tres capas<br>de un mismo<br>sistema</p>
+      </div>
+      <div class="scroll-note"><span class="scroll-line"></span> Desplaza para comenzar</div>
+    </section>
+
+    <section class="module module-warm" id="arquitectura">
+      <div class="section-heading reveal">
+        <div class="section-number">01</div>
+        <div>
+          <p class="eyebrow">Arquitectura y estructura</p>
+          <h2>La máquina<br>que <em>piensa</em></h2>
+        </div>
+        <p class="section-intro">Cada instrucción recorre un camino preciso. Entenderlo es leer la lógica íntima de cualquier dispositivo digital.</p>
+      </div>
+      <div class="module-content">
+        <article class="feature-panel cpu-panel reveal">
+          <div class="panel-label">01 / Núcleo de procesamiento</div>
+          <h3>La CPU traduce<br>intención en acción.</h3>
+          <div class="cpu-diagram" aria-label="Diagrama de componentes de una CPU">
+            <div class="cpu-chip"><span>CPU</span><small>Unidad central</small></div>
+            <div class="cpu-node node-alu"><strong>ALU</strong><small>Cálculo</small></div>
+            <div class="cpu-node node-uc"><strong>UC</strong><small>Control</small></div>
+            <div class="cpu-node node-reg"><strong>REG</strong><small>Estado</small></div>
+            <span class="connector c-one"></span><span class="connector c-two"></span><span class="connector c-three"></span>
+          </div>
+          <div class="component-list">
+            <div><span class="list-index">A</span><p><strong>ALU</strong> Ejecuta operaciones aritméticas y lógicas.</p></div>
+            <div><span class="list-index">B</span><p><strong>UC</strong> Coordina las señales y el orden de ejecución.</p></div>
+            <div><span class="list-index">C</span><p><strong>Registros</strong> Guardan datos inmediatos de alta velocidad.</p></div>
+          </div>
+        </article>
+        <article class="feature-panel cycle-panel reveal">
+          <div class="panel-label">02 / Ciclo de instrucción</div>
+          <h3>Fetch / Decode / Execute</h3>
+          <p class="panel-description">El ciclo se repite millones de veces por segundo para convertir órdenes en resultados.</p>
+          <div class="cycle-steps">
+            <button class="cycle-step active" type="button" data-step="fetch"><span>01</span><strong>Fetch</strong><small>Buscar</small></button>
+            <button class="cycle-step" type="button" data-step="decode"><span>02</span><strong>Decode</strong><small>Interpretar</small></button>
+            <button class="cycle-step" type="button" data-step="execute"><span>03</span><strong>Execute</strong><small>Ejecutar</small></button>
+          </div>
+          <div class="cycle-output" id="cycleOutput"><span class="output-kicker">ESTADO ACTUAL</span><strong>La UC busca la siguiente instrucción.</strong><p>El contador de programa indica dónde encontrarla en memoria.</p></div>
+        </article>
+      </div>
+      <div class="memory-section reveal">
+        <div class="memory-heading"><div><p class="eyebrow">Jerarquía de memoria</p><h3>Más cerca. Más rápido.<br>Más pequeño.</h3></div><p>La proximidad al procesador determina la velocidad. La capacidad crece a medida que nos alejamos.</p></div>
+        <div class="memory-stack">
+          <div class="memory-row level-registers"><span class="memory-name">Registros</span><span class="memory-detail">&lt; 1 ns / bytes</span><div class="memory-bar"></div><span class="memory-role">Inmediato</span></div>
+          <div class="memory-row level-cache"><span class="memory-name">Caché</span><span class="memory-detail">1–10 ns / MB</span><div class="memory-bar"></div><span class="memory-role">Frecuente</span></div>
+          <div class="memory-row level-ram"><span class="memory-name">Memoria RAM</span><span class="memory-detail">50–100 ns / GB</span><div class="memory-bar"></div><span class="memory-role">Temporal</span></div>
+          <div class="memory-row level-storage"><span class="memory-name">Almacenamiento</span><span class="memory-detail">ms / TB</span><div class="memory-bar"></div><span class="memory-role">Persistente</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="module module-dark" id="redes">
+      <div class="section-heading reveal">
+        <div class="section-number">02</div>
+        <div><p class="eyebrow">Fundamentos de redes</p><h2>Todo está<br><em>conectado.</em></h2></div>
+        <p class="section-intro">Una red es un acuerdo: dispositivos, medios y protocolos que permiten que la información encuentre su destino.</p>
+      </div>
+      <div class="network-layout">
+        <article class="network-definition reveal"><span class="definition-mark">↗</span><p>Una red de comunicaciones conecta dispositivos para <strong>compartir datos, recursos y servicios</strong> mediante reglas comunes llamadas protocolos.</p><div class="network-pills"><span>Dispositivos</span><span>Medios</span><span>Protocolos</span></div></article>
+        <article class="ip-mac reveal"><div class="panel-label">Direcciones / Identidad en red</div><div class="address-card ip-card"><div class="address-icon">IP</div><div><h3>Dirección lógica</h3><p>Identifica la ubicación de un dispositivo dentro de una red y puede cambiar.</p><code>192.168.1.24</code></div></div><div class="address-card mac-card"><div class="address-icon">MAC</div><div><h3>Dirección física</h3><p>Identifica la interfaz de red. Es única y está asociada al hardware.</p><code>8C:85:90:4A:2F:11</code></div></div></article>
+      </div>
+      <div class="topology-section reveal"><div class="topology-title"><p class="eyebrow">Topologías físicas</p><h3>La forma de conectar<br>cambia la operación.</h3></div><div class="topology-tabs" role="tablist"><button class="topology-tab active" data-topology="star" role="tab">Estrella</button><button class="topology-tab" data-topology="ring" role="tab">Anillo</button><button class="topology-tab" data-topology="bus" role="tab">Bus</button></div><div class="topology-display"><div class="topology-visual" id="topologyVisual" aria-label="Diagrama de topología en estrella"><div class="network-hub">SW</div><span class="topology-node t-one">01</span><span class="topology-node t-two">02</span><span class="topology-node t-three">03</span><span class="topology-node t-four">04</span></div><div class="topology-info"><span class="output-kicker" id="topologyKicker">TOPOLOGÍA 01</span><h3 id="topologyName">Estrella</h3><p id="topologyDescription">Todos los dispositivos se conectan a un punto central. Es fácil de administrar y aislar, pero el switch es un punto crítico.</p><div class="topology-tags" id="topologyTags"><span>Escalable</span><span>Fácil de mantener</span><span>Hub crítico</span></div></div></div></div>
+    </section>
+
+    <section class="module module-accent" id="forense">
+      <div class="section-heading reveal"><div class="section-number">03</div><div><p class="eyebrow">Investigación de ciberdelitos</p><h2>Leer las huellas<br>de lo <em>invisible.</em></h2></div><p class="section-intro">El análisis forense convierte rastros técnicos en una línea de tiempo verificable de lo que ocurrió.</p></div>
+      <div class="forensic-intro reveal"><span class="quote-mark">“</span><blockquote>La evidencia más valiosa no siempre está guardada en un archivo. A veces vive durante segundos en la memoria o cruza la red.</blockquote></div>
+      <div class="evidence-grid"><article class="evidence-card reveal"><div class="evidence-number">01</div><div class="evidence-icon">RAM</div><h3>Memoria volátil</h3><p>La RAM puede conservar procesos activos, credenciales, claves, conexiones y datos que desaparecen al apagar el equipo.</p><span class="evidence-label">Capturar antes de apagar</span></article><article class="evidence-card reveal"><div class="evidence-number">02</div><div class="evidence-icon">REG</div><h3>Estado del procesador</h3><p>Los registros ofrecen una instantánea del estado de ejecución: instrucciones, direcciones y valores operados en un momento concreto.</p><span class="evidence-label">Reconstruir el contexto</span></article><article class="evidence-card reveal"><div class="evidence-number">03</div><div class="evidence-icon">NET</div><h3>Tráfico de red</h3><p>Los paquetes revelan comunicaciones, destinos, horarios y patrones que permiten reconstruir el recorrido de un incidente.</p><span class="evidence-label">Seguir la ruta</span></article></div>
+      <div class="forensic-principles reveal"><div><p class="eyebrow">Principio esencial</p><h3>Preservar antes<br>de interpretar.</h3></div><div class="principle-list"><div><span>01</span><p><strong>Integridad</strong> Trabajar sobre copias verificadas mediante hashes.</p></div><div><span>02</span><p><strong>Volatilidad</strong> Recopilar primero lo que desaparecerá antes.</p></div><div><span>03</span><p><strong>Trazabilidad</strong> Documentar cada acción y cada transferencia.</p></div></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-brand"><span class="brand-mark">N/</span><p>Una guía para entender<br>los sistemas que nos conectan.</p></div><div class="footer-meta"><span>INFORMÁTICA BÁSICA II</span><span id="currentYear"></span></div><a class="back-top" href="#inicio" aria-label="Volver al inicio">↑</a></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
